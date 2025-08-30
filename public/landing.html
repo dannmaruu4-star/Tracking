@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Please wait...</h1>
+    <p>You are being redirected to your destination.</p>
+    <p><small>Redirecting in <span id="countdown">3</span> seconds...</small></p>
+  </div>
+
+  <script>
+    // Dapatkan target URL dari query string
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("target");
+
+    let counter = 3;
+    const countdownEl = document.getElementById("countdown");
+
+    const interval = setInterval(() => {
+      counter--;
+      countdownEl.textContent = counter;
+      if (counter === 0) {
+        clearInterval(interval);
+        if (target) {
+          window.location.href = target;
+        }
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
